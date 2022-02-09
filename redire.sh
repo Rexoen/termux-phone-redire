@@ -61,7 +61,7 @@ make_autolaunch(){
 	fi
 	cat > $HOME/.termux/boot/start-crond <<- _EOF
 	#!/data/data/com.termux/files/usr/bin/bash
-	termux-wakelock-enable true
+	termux-wake-lock
 	crond
 	touch /data/data/com.termux/files/usr/tmp/server_launched
 	_EOF
