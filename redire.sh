@@ -64,6 +64,7 @@ make_autolaunch(){
 	termux-wake-lock
 	crond
 	touch /data/data/com.termux/files/usr/tmp/server_launched
+	termux-notification -t "转发服务已开启" -c "短信验证码和未接来电将会被转发到Token绑定的微信"
 	_EOF
 	chmod +x $HOME/.termux/boot/start-crond
 	if [ $(cat /data/data/com.termux/files/usr/etc/bash.bashrc | tail -n 1 | grep server_launched | wc -l) -eq 0 ];then
