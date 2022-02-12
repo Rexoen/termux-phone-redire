@@ -28,7 +28,7 @@ acquire_permissions(){
 }
 
 install_pkg(){
-	pkg install -y termux-api cronie curl
+	pkg install -y termux-api cronie curl jq
 }
 
 strip_quotes(){
