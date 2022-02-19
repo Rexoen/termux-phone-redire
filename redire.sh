@@ -72,7 +72,7 @@ make_autolaunch(){
 	fi
 }
 
-SOURCE=$0
+SOURCE=$PWD/$(basename $0)
 
 configure_cron(){
 	LIST=`crontab -l`
