@@ -68,7 +68,7 @@ make_autolaunch(){
 	_EOF
 	chmod +x $HOME/.termux/boot/start-crond
 	if [ $(cat /data/data/com.termux/files/usr/etc/bash.bashrc | tail -n 1 | grep server_launched | wc -l) -eq 0 ];then
-		tee -a /data/data/com.termux/files/usr/etc/bash.bashrc <<< "[ -f /data/data/com.termux/files/usr/tmp/server_launched ] || run-parts $HOME/.termux/boot"
+		tee -a /data/data/com.termux/files/usr/etc/bash.bashrc <<< "[ -f /data/data/com.termux/files/usr/tmp/server_launched ] || [ -e /data/data/com.termux/files/usr/var/run/crond.pid ] || run-parts $HOME/.termux/boot"
 	fi
 }
 
