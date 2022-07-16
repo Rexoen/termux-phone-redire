@@ -56,7 +56,7 @@ fi
 token=$(cat $token_path)
 
 make_autolaunch(){
-	if [ -d $HOME/.termux/boot ];then
+	if [ ! -d $HOME/.termux/boot ];then
 		mkdir -p $HOME/.termux/boot
 	fi
 	cat > $HOME/.termux/boot/start-crond <<- _EOF
