@@ -49,12 +49,6 @@ write_token(){
 
 }
 
-if [ ! -f $token_path ];then
-	write_token
-fi
-
-token=$(cat $token_path)
-
 make_autolaunch(){
 	if [ ! -d $HOME/.termux/boot ];then
 		mkdir -p $HOME/.termux/boot
@@ -95,6 +89,9 @@ for i in {0..$#};do
 			install_pkg
 			configure_cron
 			make_autolaunch
+            write_token
+            crond
+            exit 0
 			continue
 			;;
 		-t | --token)
@@ -104,15 +101,23 @@ for i in {0..$#};do
 			;;
 		-h | --help)
 			help_msg
+            exit 0
 			continue
 			;;
 		*)
 			help_msg
+            exit 0
 			;;
 	esac
 	shift
 done
 fi
+
+if [ ! -f $token_path ];then
+    write_token
+fi
+
+token=$(cat $token_path)
 
 termux-wifi-enable true
 
