@@ -71,9 +71,9 @@ SOURCE=$PWD/$(basename $0)
 configure_cron(){
 	LIST=`crontab -l`
 	if echo "$LIST" | grep -q "$SOURCE"; then
-	   echo "The cron job had already been added before.";
+		echo "The cron job had already been added before.";
 	else
-	   crontab -l | { cat; echo "*/1 * * * * $SOURCE"; } | crontab -
+		crontab -l | { cat; echo "*/1 * * * * $SOURCE"; } | crontab -
 	fi
 }
 
@@ -89,9 +89,9 @@ for i in {0..$#};do
 			install_pkg
 			configure_cron
 			make_autolaunch
-            write_token
-            crond
-            exit 0
+			write_token
+			crond
+			exit 0
 			continue
 			;;
 		-t | --token)
@@ -101,23 +101,24 @@ for i in {0..$#};do
 			;;
 		-h | --help)
 			help_msg
-            exit 0
+			exit 0
 			continue
 			;;
 		*)
 			help_msg
-            exit 0
+			exit 0
 			;;
 	esac
 	shift
 done
 fi
 
-if [ ! -f $token_path ];then
-    write_token
+if [ -z $token ];then
+	if [ ! -f $token_path ];then
+		write_token
+	fi
+	token=$(cat $token_path)
 fi
-
-token=$(cat $token_path)
 
 termux-wifi-enable true
 
