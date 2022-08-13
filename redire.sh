@@ -35,11 +35,26 @@ strip_quotes(){
 	echo $(sed -e 's/^"//' -e 's/"$//' <<< $1)
 }
 
+#write_token(){
+#	received_token=$(termux-dialog -t "PushPlus Token:" | jq)
+#	code=$(strip_quotes $(jq .code <<< $received_token))
+#	text=$(strip_quotes $(jq .text <<< $received_token))
+#	if [ "$code" != -1 ] || [ -z "$text" ];then
+#		echo pls input a valid string..
+#		sleep 2
+#		write_token
+#	else
+#		echo $text >> $token_path
+#		echo "token($text) has been write to $token_path"
+#	fi
+#
+#}
+
 write_token(){
-	received_token=$(termux-dialog -t "PushPlus Token:" | jq)
-	code=$(strip_quotes $(jq .code <<< $received_token))
-	text=$(strip_quotes $(jq .text <<< $received_token))
-	if [ $code != -1 ] || [ -z $text ];then
+	text=""
+	read -p "PushPlus Token:" text
+	text_len=$(wc -m <<< "$text")
+	if [ "$text_len" -ne 33 ];then
 		echo pls input a valid string..
 		write_token
 	else
