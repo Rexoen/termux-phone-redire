@@ -119,6 +119,9 @@ for i in {0..$#};do
 			exit 0
 			continue
 			;;
+		-v | --verify)
+			wechat_notify "接口测试" "Message from termux!"
+			;;
 		*)
 			help_msg
 			exit 0
